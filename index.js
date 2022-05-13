@@ -3,6 +3,7 @@ import path from 'path'
 import parser from '@babel/parser'
 import traverse from '@babel/traverse'
 import ejs from 'ejs'
+import {transformFromAst} from "babel-core"
 console.log(traverse)  // 了解traverse的内容
 function createAsset(filePath){
     // TODO 1. 获取文件内容
@@ -30,7 +31,10 @@ function createAsset(filePath){
         }
     })
 
-
+    const {code} =  transformFromAst(ast,null,{
+        presets:["env"]
+    })
+    console.log(code)
     return {
         filePath,
         source,
@@ -74,4 +78,4 @@ function build(graph){
     console.log(code)
 }
 
-build(graph)
+// build(graph)
