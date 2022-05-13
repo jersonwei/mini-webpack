@@ -13,35 +13,22 @@
     
     require("./main.js")
 })({
-    "./foo.js":function (require,module,exports){
-        // foo js
-        // import bar from './bar'
-        function foo(){
-            console.log('foo')
-        }
-        module.exports = {
-            foo
-        }
-    },
-    "./bar.js":
-    function (require,module,exports){
-        // import foo from './foo'
-        function bar(){
-        console.log('bar')
-    }
-    module.exports = {
-        bar
-    }
-    },
-    "./main.js":function (require,module,exports){
-        // main js
-        // import foo from './foo.js'
-        // import bar from './bar.js'
-        const {foo} = require('./foo')
-        const {bar} = require('./bar')
-        foo()
-        bar()
-        console.log('main.js')
-        
+
+    "":function (require,module,exports){
+           "use strict";
+
+var _foo = require("./foo.js");
+
+var _foo2 = _interopRequireDefault(_foo);
+
+var _bar = require("./bar.js");
+
+var _bar2 = _interopRequireDefault(_bar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _foo2.default)();
+(0, _bar2.default)();
+console.log('main.js');
         }
 })

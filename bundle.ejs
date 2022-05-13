@@ -13,35 +13,8 @@
     
     require("./main.js")
 })({
-    "./foo.js":function (require,module,exports){
-        // foo js
-        // import bar from './bar'
-        function foo(){
-            console.log('foo')
-        }
-        module.exports = {
-            foo
-        }
-    },
-    "./bar.js":
-    function (require,module,exports){
-        // import foo from './foo'
-        function bar(){
-        console.log('bar')
-    }
-    module.exports = {
-        bar
-    }
-    },
-    "./main.js":function (require,module,exports){
-        // main js
-        // import foo from './foo.js'
-        // import bar from './bar.js'
-        const {foo} = require('./foo')
-        const {bar} = require('./bar')
-        foo()
-        bar()
-        console.log('main.js')
-        
+
+    "<%- data[0]["filePath"] %>":function (require,module,exports){
+           <%- data[0]["code"] %>
         }
 })
