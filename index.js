@@ -69,6 +69,8 @@ function build(graph){
         encoding:"utf-8"
     })
     const code =  ejs.render(template)
+
+    fs.writeFileSync("./dist/bundle.js",code)
     console.log(code)
 }
 
