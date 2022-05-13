@@ -4,7 +4,8 @@ import parser from '@babel/parser'
 import traverse from '@babel/traverse'
 import ejs from 'ejs'
 import {transformFromAst} from "babel-core"
-console.log(traverse)  // 了解traverse的内容
+let id = 0
+// console.log(traverse)  // 了解traverse的内容
 function createAsset(filePath){
     // TODO 1. 获取文件内容
     // AST 抽象语法树
@@ -15,7 +16,7 @@ function createAsset(filePath){
         encoding:"utf-8"
     })
     
-    console.log(source)
+    // console.log(source)
     // 2.获取依赖关系
 
     // 使用babel内置的API将读取的文件内容转译成AST树
@@ -38,7 +39,9 @@ function createAsset(filePath){
     return {
         filePath,
         code,
-        deps
+        deps,
+        mapping:{},
+        id:id++
     }
 }
 
@@ -55,7 +58,8 @@ function createGraph(){
     for (const asset of queue) {
         asset.deps.forEach(realtivePath => {
            const child =  createAsset(path.resolve('./example',realtivePath))
-            console.log(child)
+            // console.log(child)
+            asset.mapping[realtivePath] = child.id
             // 将child存储到queue中
             queue.push(child)
         });
@@ -65,7 +69,7 @@ function createGraph(){
 }
 
 const graph =  createGraph()
-console.log(graph)
+// console.log(graph)
 
 function build(graph){
 
@@ -75,10 +79,12 @@ function build(graph){
     
     const data = graph.map((asset) => {
         return {
-            filePath:asset.filePath,
-            code:asset.code
+            id:asset.id,
+            code:asset.code,
+            mapping:asset.mapping
         }
     })
+    console.log(data)
 
     const code =  ejs.render(template,{data})
 

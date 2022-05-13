@@ -21,6 +21,6 @@
     <% data.forEach(info=>{ %>
         "<%- info["id"] %>":[function (require,module,exports){
             <%- info["code"] %>
-        },<%- info["mapping"] %>]
+        },<%- JSON.stringify(info["mapping"]) %>],
         <% }); %>
 })

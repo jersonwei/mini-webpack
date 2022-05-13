@@ -49,7 +49,7 @@
     // }
     // }
 })({
-    0:[function (require,module,exports){
+    1:[function (require,module,exports){
         // main js
         // import foo from './foo.js'
         // import bar from './bar.js'
@@ -59,7 +59,7 @@
         bar()
         console.log('main.js')
         },{"./foo.js":2}],
-    1:[function (require,module,exports){
+    2:[function (require,module,exports){
         // foo js
         // import bar from './bar'
         function foo(){
@@ -69,7 +69,7 @@
             foo
         }
     },{"./bar.js":3}],
-    2:[
+    3:[
     function (require,module,exports){
         // import foo from './foo'
         function bar(){
