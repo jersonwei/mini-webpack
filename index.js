@@ -32,6 +32,7 @@ function createAsset(filePath){
 
 
     return {
+        filePath,
         source,
         deps
     }
@@ -51,10 +52,13 @@ function createGraph(){
         asset.deps.forEach(realtivePath => {
            const child =  createAsset(path.resolve('./example',realtivePath))
             console.log(child)
+            // 将child存储到queue中
+            queue.push(child)
         });
     }
 
-
+    return queue
 }
 
-createGraph()
+const graph =  createGraph()
+console.log(graph)
