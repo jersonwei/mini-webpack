@@ -21,19 +21,20 @@ function createAsset(){
         sourceType:"module"
     })
     // console.log(ast)
-
+    const deps = []
     traverse.default(ast,{
         ImportDeclaration({node}){
             console.log("import==================")
-            console.log(node.source.value)
+            deps.push(node.source.value)
         }
     })
 
 
-
-
-
-    return {}
+    return {
+        source,
+        deps
+    }
 }
 
-createAsset()
+const asset =  createAsset()
+console.log(asset)
