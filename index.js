@@ -75,7 +75,7 @@ function build(graph){
     
     const data = graph.map((asset) => {
         return {
-            filepath:asset.filePath,
+            filePath:asset.filePath,
             code:asset.code
         }
     })
