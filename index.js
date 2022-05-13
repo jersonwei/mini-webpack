@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 import parser from '@babel/parser'
 import traverse from '@babel/traverse'
 
@@ -48,7 +49,8 @@ function createGraph(){
 
     for (const asset of queue) {
         asset.deps.forEach(realtivePath => {
-            console.log(realtivePath)
+           const child =  createAsset(path.resolve('./example',realtivePath))
+            console.log(child)
         });
     }
 
