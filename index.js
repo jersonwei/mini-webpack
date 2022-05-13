@@ -23,9 +23,9 @@ function createAsset(){
     // console.log(ast)
 
     traverse.default(ast,{
-        ImportDeclaration(data){
+        ImportDeclaration({node}){
             console.log("import==================")
-            console.log(data)
+            console.log(node.source.value)
         }
     })
 
