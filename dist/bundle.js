@@ -14,7 +14,7 @@
     require("./main.js")
 })({
     
-        "./example/main.js":function (require,module,exports){
+        1:[function (require,module,exports){
             "use strict";
 
 var _foo = require("./foo.js");
@@ -30,9 +30,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _foo2.default)();
 (0, _bar2.default)();
 console.log('main.js');
-        },
+        },{"./foo.js":2}],
         
-        "D:\mixfile\Github\mini-webpack\example\foo.js":function (require,module,exports){
+        2:[function (require,module,exports){
             "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44,9 +44,9 @@ exports.foo = foo;
 function foo() {
   console.log('foo');
 }
-        },
+        },{"./bar.js":3}],
         
-        "D:\mixfile\Github\mini-webpack\example\bar.js":function (require,module,exports){
+        3:[function (require,module,exports){
             "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58,6 +58,6 @@ exports.bar = bar;
 function bar() {
   console.log('bar');
 }
-        },
+        },{}],
         
 })

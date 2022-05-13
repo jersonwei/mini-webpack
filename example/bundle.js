@@ -1,17 +1,22 @@
-(function(madules){
-    function require(filePath){
-        const fn = madules[filePath]
+(function(modules){
+    function require(id){
+        const [fn,mapping] = modules[id]
     
         const module = {
             exports:{
             }
         }
-        fn(require,module,module.exports)
+
+        function localRequire(filePath){
+            const id = mapping[filePath]
+            return require(id)
+        }
+        fn(localRequire,module,module.exports)
     
         return module.exports
     }
     
-    require("./main.js")
+    require(1)
     // function mainjs(require,module,exports){
     // // main js
     // // import foo from './foo.js'
@@ -44,27 +49,7 @@
     // }
     // }
 })({
-    "./foo.js":function (require,module,exports){
-        // foo js
-        // import bar from './bar'
-        function foo(){
-            console.log('foo')
-        }
-        module.exports = {
-            foo
-        }
-    },
-    "./bar.js":
-    function (require,module,exports){
-        // import foo from './foo'
-        function bar(){
-        console.log('bar')
-    }
-    module.exports = {
-        bar
-    }
-    },
-    "./main.js":function (require,module,exports){
+    0:[function (require,module,exports){
         // main js
         // import foo from './foo.js'
         // import bar from './bar.js'
@@ -73,6 +58,26 @@
         foo()
         bar()
         console.log('main.js')
-        
+        },{"./foo.js":2}],
+    1:[function (require,module,exports){
+        // foo js
+        // import bar from './bar'
+        function foo(){
+            console.log('foo')
         }
+        module.exports = {
+            foo
+        }
+    },{"./bar.js":3}],
+    2:[
+    function (require,module,exports){
+        // import foo from './foo'
+        function bar(){
+        console.log('bar')
+    }
+    module.exports = {
+        bar
+    }
+    },{}]
+
 })
