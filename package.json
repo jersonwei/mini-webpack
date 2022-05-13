@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/jersonwei/mini-webpack/issues"
   },
-  "homepage": "https://github.com/jersonwei/mini-webpack#readme"
+  "homepage": "https://github.com/jersonwei/mini-webpack#readme",
+  "dependencies": {
+    "@babel/parser": "^7.17.10",
+    "@babel/traverse": "^7.17.10"
+  }
 }
