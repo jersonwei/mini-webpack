@@ -37,7 +37,7 @@ function createAsset(filePath){
     console.log(code)
     return {
         filePath,
-        source,
+        code,
         deps
     }
 }
