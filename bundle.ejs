@@ -1,21 +1,26 @@
 (function(madules){
-    function require(filePath){
-        const fn = madules[filePath]
+    function require(id){
+        const [fn,mapping] = modules[id]
     
         const module = {
             exports:{
             }
         }
-        fn(require,module,module.exports)
+
+        function localRequire(filePath){
+            const id = mapping[filePath]
+            return require(id)
+        }
+        fn(localRequire,module,module.exports)
     
         return module.exports
     }
     
-    require("./main.js")
+    require(1)
 })({
     <% data.forEach(info=>{ %>
-        "<%- info["filePath"] %>":function (require,module,exports){
+        "<%- info["id"] %>":[function (require,module,exports){
             <%- info["code"] %>
-        },
+        },<%- info["mapping"] %>]
         <% }); %>
 })
