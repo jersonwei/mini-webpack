@@ -12,7 +12,7 @@ const webpackConfig = {
         rules:[
             {
                 test:/\.json$/,
-                use:jsonLoader
+                use:[jsonLoader]
             }
         ]
     }
@@ -34,7 +34,11 @@ function createAsset(filePath){
 
     loaders.forEach(({test,use}) => {
         if(test.test(filePath)){
-            source =  use(source)
+            if(Array.isArray(use)){
+                use.reverse().forEach((fn)=>{
+                    source =  fn(source)
+                })
+            }
         }
     })
     
