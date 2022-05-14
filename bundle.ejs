@@ -1,4 +1,4 @@
-(function(madules){
+(function(modules){
     function require(id){
         const [fn,mapping] = modules[id]
     
@@ -16,7 +16,7 @@
         return module.exports
     }
     
-    require(1)
+    require(0)
 })({
     <% data.forEach(info=>{ %>
         "<%- info["id"] %>":[function (require,module,exports){

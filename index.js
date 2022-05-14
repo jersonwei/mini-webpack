@@ -35,7 +35,7 @@ function createAsset(filePath){
     const {code} =  transformFromAst(ast,null,{
         presets:["env"]
     })
-    console.log(code)
+    // console.log(code)
     return {
         filePath,
         code,
@@ -84,11 +84,11 @@ function build(graph){
             mapping:asset.mapping
         }
     })
-    console.log(data)
+    // console.log(data)
 
     const code =  ejs.render(template,{data})
 
-    console.log(data) 
+    console.log('data--',data) 
 
     fs.writeFileSync("./dist/bundle.js",code)
 }

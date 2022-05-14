@@ -1,4 +1,4 @@
-(function(madules){
+(function(modules){
     function require(id){
         const [fn,mapping] = modules[id]
     
@@ -16,7 +16,7 @@
         return module.exports
     }
     
-    require(1)
+    require(0)
 })({
     
         "0":[function (require,module,exports){
@@ -24,18 +24,11 @@
 
 var _foo = require("./foo.js");
 
-var _foo2 = _interopRequireDefault(_foo);
+// import bar from './bar.js'
+(0, _foo.foo)(); // bar()
 
-var _bar = require("./bar.js");
-
-var _bar2 = _interopRequireDefault(_bar);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(0, _foo2.default)();
-(0, _bar2.default)();
 console.log('main.js');
-        },{"./foo.js":1,"./bar.js":2}],
+        },{"./foo.js":1}],
         
         "1":[function (require,module,exports){
             "use strict";
@@ -45,11 +38,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.foo = foo;
 
-// import bar from './bar'
+var _bar = require("./bar.js");
+
 function foo() {
   console.log('foo');
+  (0, _bar.bar)();
 }
-        },{}],
+        },{"./bar.js":2}],
         
         "2":[function (require,module,exports){
             "use strict";
