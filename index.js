@@ -24,10 +24,18 @@ function createAsset(filePath){
     // TODO 1. 获取文件内容
     // AST 抽象语法树
     
-    
-    const source =fs.readFileSync(filePath,{
+    let source =fs.readFileSync(filePath,{
         // 将babel转译成字符串
         encoding:"utf-8"
+    })
+    
+    // initLoader
+    const loaders = webpackConfig.module.rules
+
+    loaders.forEach(({test,use}) => {
+        if(test.test(filePath)){
+            source =  use(source)
+        }
     })
     
     // console.log(source)
