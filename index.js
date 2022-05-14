@@ -5,6 +5,8 @@ import traverse from '@babel/traverse'
 import ejs from 'ejs'
 import {transformFromAst} from "babel-core"
 import {jsonLoader} from './jsonLoader.js'
+import {ChangeOutputPath} from './ChangeOutputPath.js'
+import { SyncHook } from 'tapable'
 let id = 0
 
 const webpackConfig = {
@@ -15,7 +17,12 @@ const webpackConfig = {
                 use:[jsonLoader]
             }
         ]
-    }
+    },
+    plugins:[new ChangeOutputPath()]
+}
+
+const hooks = {
+    emitFile:new SyncHook()
 }
 
 
@@ -100,6 +107,15 @@ function createGraph(){
     return queue
 }
 
+function initPlugins(){
+    const plugins = webpackConfig.plugins
+    plugins.forEach((plugin) => {
+        plugin.apply(hooks)
+    })
+}
+
+initPlugins()
+
 const graph =  createGraph()
 // console.log(graph)
 
@@ -122,6 +138,7 @@ function build(graph){
 
     console.log('data--',data) 
 
+    hooks.emitFile.call()
     fs.writeFileSync("./dist/bundle.js",code)
 }
 
