@@ -22,7 +22,7 @@ const webpackConfig = {
 }
 
 const hooks = {
-    emitFile:new SyncHook()
+    emitFile:new SyncHook(["context"])
 }
 
 
@@ -137,9 +137,15 @@ function build(graph){
     const code =  ejs.render(template,{data})
 
     console.log('data--',data) 
+    let outputPath = "./dist/bundle.js"
+    const context = {
+        ChangeOutputPath(path){
+            outputPath = path
+        }
+    }
 
-    hooks.emitFile.call()
-    fs.writeFileSync("./dist/bundle.js",code)
+    hooks.emitFile.call(context)
+    fs.writeFileSync(outputPath,code)
 }
 
 build(graph)
